@@ -2,13 +2,7 @@ import { stateSelectors } from "./reducer.js";
 
 export const {
   // Analyses
-  getSelectedAnalysisDashboard,
-  getSelectedAnalysisID,
-  getAnalysesData,
-  getAnalysesOrder,
-
-  //Dashboards
-  getDashboards,
+  getSelectedAnalysis,
 
   // Dashboard
   getSelectedDashboard,
