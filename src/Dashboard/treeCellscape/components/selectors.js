@@ -22,7 +22,8 @@ export {
 // Menu
 // makeGetIDsByIndices, makeGetMissingIDMappings -> Heatmap
 export {
-  getSelectedTitle,
+  getSelectedAnalysis,
+  getSelectedDashboard,
   isCurrRootAtRoot,
   getCurrTreeIndices
 } from "../selectors.js";

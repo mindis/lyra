@@ -12,13 +12,6 @@ const { width, height } = config;
 const TreeCellscape = () => (
   <div>
     <Menu width={width} />
-    <div>
-      <svg width={width} height={height}>
-        <Tree />
-        <Heatmap />
-      </svg>
-      <Tooltip />
-    </div>
   </div>
 );
 

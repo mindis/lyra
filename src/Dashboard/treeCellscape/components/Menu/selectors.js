@@ -1,4 +1,4 @@
-export { getSelectedTitle } from "../selectors.js";
+export { getSelectedAnalysis, getSelectedDashboard } from "../selectors.js";
 
 // TreeZoomOutButton
 export { isCurrRootAtRoot } from "../selectors.js";

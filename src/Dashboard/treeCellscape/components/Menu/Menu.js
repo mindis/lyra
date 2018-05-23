@@ -1,24 +1,29 @@
 import React from "react";
 import PropTypes from "prop-types";
-
 import { connect } from "react-redux";
-import { getSelectedTitle } from "./selectors.js";
+
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
+
+import { getSelectedAnalysis, getSelectedDashboard } from "./selectors.js";
 
 import TreeZoomOutButton from "./TreeZoomOutButton/TreeZoomOutButton";
 import DownloadCSVButton from "./DownloadCSVButton/DownloadCSVButton";
 
 import styled from "react-emotion";
 
-const Menu = ({ analysisTitle, width }) => (
+const Menu = ({ analysisID, dashboardID, width }) => (
   <MenuDiv width={width}>
-    <Title>{analysisTitle}</Title>
+    <MenuTitle analysis={analysisID} dashboard={dashboardID} />
     <TreeZoomOutButton Button={Button} />
     <DownloadCSVButton Button={Button} />
   </MenuDiv>
 );
 
 Menu.propTypes = {
-  analysisTitle: PropTypes.string.isRequired,
+  analysisID: PropTypes.string.isRequired,
+
+  dashboardID: PropTypes.string.isRequired,
 
   width: PropTypes.number.isRequired
 };
@@ -41,6 +46,30 @@ const MenuDiv = styled("div")`
   font-size: 0px;
 `;
 
+const TITLE_QUERY = gql`
+  query analysis($analysis: String!, $dashboard: String!) {
+    analysis(analysis: $analysis, dashboard: $dashboard) {
+      title
+    }
+  }
+`;
+
+const MenuTitle = ({ analysis, dashboard }) => (
+  <Query query={TITLE_QUERY} variables={{ analysis, dashboard }}>
+    {({ loading, error, data }) => {
+      if (loading) return null;
+      if (error) return null;
+
+      return <Title>{data.analysis.title}</Title>;
+    }}
+  </Query>
+);
+
+MenuTitle.propTypes = {
+  analysis: PropTypes.string.isRequired,
+
+  dashboard: PropTypes.string.isRequired
+};
 const Title = styled("span")`
   margin-top: 2%;
   margin-bottom: 2%;
@@ -71,7 +100,8 @@ const Button = styled("button")`
 `;
 
 const mapState = state => ({
-  analysisTitle: getSelectedTitle(state)
+  analysisID: getSelectedAnalysis(state),
+  dashboardID: getSelectedDashboard(state)
 });
 
 export default connect(mapState)(Menu);
