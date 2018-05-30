@@ -54,18 +54,26 @@ const clusterRenderProp = ({ loading, error, data }) => {
   );
 };
 
-const TooltipText = ({ analysis, element, index, range }) =>
-  isCluster(element) ? (
-    <Tooltip text={range[1] - range[0] + 1 + " descendents"} />
-  ) : isRow(element) ? (
-    <Query query={ROW_QUERY} variables={{ analysis, index }}>
-      {rowRenderProp}
-    </Query>
-  ) : isCluster ? (
-    <Query query={CLUSTER_QUERY} variables={{ analysis, index }}>
-      {clusterRenderProp}
-    </Query>
-  ) : null;
+const TooltipText = ({ analysis, element, index, range }) => {
+  if (isCluster(element))
+    return <Tooltip text={range[1] - range[0] + 1 + " descendents"} />;
+
+  if (isRow(element))
+    return (
+      <Query query={ROW_QUERY} variables={{ analysis, index }}>
+        {rowRenderProp}
+      </Query>
+    );
+
+  if (isClade(element))
+    return (
+      <Query query={CLUSTER_QUERY} variables={{ analysis, index }}>
+        {clusterRenderProp}
+      </Query>
+    );
+
+  return null;
+};
 
 const ROW_QUERY = gql`
   query treeNode($analysis: String!, $index: Int!) {
