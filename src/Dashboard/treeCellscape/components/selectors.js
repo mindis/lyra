@@ -1,19 +1,13 @@
 import { createSelector } from "reselect";
 import { treeConfig } from "../config.js";
 
-import {
-  getCurrTreeRootRecord,
-  getCellsIndexToID,
-  getHighlightedIndex,
-  getTreeData
-} from "../selectors.js";
+import { getCurrRootTotalNodes as getTotalIndexNum } from "../selectors.js";
 
 // Tooltip
 export {
   getHighlightedElement,
   getHighlightedIndex,
   getHighlightedRange,
-  getCellsIndexToID,
   isClade,
   isCluster,
   isRow
@@ -24,18 +18,15 @@ export {
 export {
   getSelectedAnalysis,
   getSelectedDashboard,
-  isCurrRootAtRoot,
-  getCurrTreeIndices
+  isCurrRootAtRoot
 } from "../selectors.js";
 
 // Tree
 export {
   makeIsIndexRangeHighlighted,
   makeIsIndexHighlighted,
-  getCurrTreeRootID,
-  makeGetTreeNodeRecordByID,
-  getTreeData,
-  makeGetTreeNodeRecordsByID
+  getCurrRootID,
+  getCurrRootRange
 } from "../selectors.js";
 
 // Heatmap
@@ -50,14 +41,7 @@ export {
   makeGetIDsByIndices
 } from "../selectors.js";
 
-/**
- * Gets number of nodes contained in tree from root
- */
-export const getTotalIndexNum = createSelector(
-  [getCurrTreeRootRecord],
-  // object => int
-  treeRoot => treeRoot["maxDescendantIndex"] - treeRoot["heatmapIndex"] + 1
-);
+export { getCurrRootTotalNodes as getTotalIndexNum } from "../selectors.js";
 
 /**
  * Gets ratio of heatmap indices per pixel
@@ -66,10 +50,4 @@ export const getIndicesPerPixel = createSelector(
   [getTotalIndexNum],
   // int => int
   numNodes => numNodes / treeConfig["height"]
-);
-
-export const getHighlightedTreeData = createSelector(
-  [getTreeData, getHighlightedIndex, getCellsIndexToID],
-  (treeData, index, indexToID) =>
-    index !== null ? treeData[indexToID[index]] : null
 );

@@ -18,5 +18,8 @@ export const {
   getChromosomeOrder,
   getHighlightedIndex,
   getHighlightedRange,
-  getHighlightedElement
+  getHighlightedElement,
+  getRoot,
+  getRootPath,
+  getRootRanges
 } = stateSelectors;

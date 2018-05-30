@@ -1,7 +1,6 @@
 export {
   getSegsData,
   getSegsPending,
-  getTreePath,
   getTreeData,
   getTreePending,
   getTreeRootID,
@@ -12,5 +11,8 @@ export {
   getHighlightedIndex,
   getHighlightedRange,
   getHighlightedElement,
-  getSelectedAnalysis
+  getSelectedAnalysis,
+  getRoot,
+  getRootPath,
+  getRootRanges
 } from "main/stateSelectors.js";

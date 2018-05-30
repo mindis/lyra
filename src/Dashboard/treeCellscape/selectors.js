@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 
 import { getTreeData, getTreeRootID } from "./stateSelectors.js";
-import { getCurrTreeRootID } from "./ui/selectors.js";
+import { getCurrRootID } from "./ui/selectors.js";
 
 export * from "./data/selectors.js";
 export * from "./ui/selectors.js";
@@ -12,14 +12,9 @@ export * from "./stateSelectors.js";
  * Gets tree root record
  */
 export const getCurrTreeRootRecord = createSelector(
-  [getTreeData, getCurrTreeRootID],
+  [getTreeData, getCurrRootID],
   // (object, string) => object
   (nodes, rootID) => nodes[rootID]
-);
-
-export const isCurrRootAtRoot = createSelector(
-  [getCurrTreeRootID, getTreeRootID],
-  (currRootID, trueRootID) => currRootID === trueRootID
 );
 
 export const getCurrTreeIndices = createSelector(

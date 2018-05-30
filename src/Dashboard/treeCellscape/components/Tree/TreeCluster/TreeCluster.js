@@ -15,7 +15,6 @@ const TreeCluster = ({
   depth,
   maxHeight,
   yScale,
-  clusterColorScale,
   isHighlighted,
   onMouseEnter,
   onMouseLeave
@@ -31,7 +30,9 @@ const TreeCluster = ({
       x={x}
       y={yMin}
       fill={
-        isHighlighted ? config["highlightColor"] : clusterColorScale(maxHeight)
+        isHighlighted
+          ? config["highlightColor"]
+          : config["clusterColorGradient"][0]
       }
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}

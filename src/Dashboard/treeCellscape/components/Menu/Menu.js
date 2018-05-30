@@ -1,29 +1,24 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
 import { Query } from "react-apollo";
 import gql from "graphql-tag";
-
-import { getSelectedAnalysis, getSelectedDashboard } from "./selectors.js";
 
 import TreeZoomOutButton from "./TreeZoomOutButton/TreeZoomOutButton";
 import DownloadCSVButton from "./DownloadCSVButton/DownloadCSVButton";
 
 import styled from "react-emotion";
 
-const Menu = ({ analysisID, dashboardID, width }) => (
+const Menu = ({ analysis, width }) => (
   <MenuDiv width={width}>
-    <MenuTitle analysis={analysisID} dashboard={dashboardID} />
+    <MenuTitle analysis={analysis} dashboard={"TREE_CELLSCAPE"} />
     <TreeZoomOutButton Button={Button} />
-    <DownloadCSVButton Button={Button} />
+    <DownloadCSVButton Button={Button} analysis={analysis} />
   </MenuDiv>
 );
 
 Menu.propTypes = {
-  analysisID: PropTypes.string.isRequired,
-
-  dashboardID: PropTypes.string.isRequired,
+  analysis: PropTypes.string.isRequired,
 
   width: PropTypes.number.isRequired
 };
@@ -99,9 +94,4 @@ const Button = styled("button")`
   }
 `;
 
-const mapState = state => ({
-  analysisID: getSelectedAnalysis(state),
-  dashboardID: getSelectedDashboard(state)
-});
-
-export default connect(mapState)(Menu);
+export default Menu;
