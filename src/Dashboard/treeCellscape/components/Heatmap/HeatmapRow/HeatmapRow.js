@@ -22,6 +22,9 @@ import { highlightElement, unhighlightElement } from "./actions.js";
 
 class HeatmapRow extends Component {
   static propTypes = {
+    /** chromosomes */
+    chromosomes: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
+
     /** rowData */
     rowData: PropTypes.object.isRequired,
 
@@ -45,15 +48,15 @@ class HeatmapRow extends Component {
   shouldComponentUpdate(nextProps, nextState) {
     return (
       this.props.isHighlighted !== nextProps.isHighlighted ||
-      this.props.rowData.heatmapIndex !== nextProps.rowData.heatmapIndex ||
+      this.props.rowData.index !== nextProps.rowData.index ||
       this.isYPositionsDifferent(this.props, nextProps)
     );
   }
 
   isYPositionsDifferent(currProps, nextProps) {
     return (
-      currProps.yScale(currProps.rowData.cellID) !==
-      nextProps.yScale(nextProps.rowData.cellID)
+      currProps.yScale(currProps.rowData.index) !==
+      nextProps.yScale(nextProps.rowData.index)
     );
   }
 
