@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 
-import { getChromPixelMapping, getChromosomeOrder } from "./selectors.js";
+import { getChromPixelMapping } from "./selectors.js";
 
 import ChromAxisItem from "./ChromAxisItem.js";
 
@@ -20,6 +20,8 @@ const ChromAxis = ({ chromosomeMap, chromosomes, y }) => {
 
 ChromAxis.propTypes = {
   chromosomeMap: PropTypes.object.isRequired,
+
+  chromosomes: PropTypes.arrayOf(PropTypes.object.isRequired).isRequired,
 
   y: PropTypes.number.isRequired
 };

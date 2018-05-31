@@ -14,6 +14,18 @@ import config from "./config.js";
  */
 
 class TreeRoot extends Component {
+  static propTypes = {
+    trueRootID: PropTypes.string.isRequired,
+    trueIndex: PropTypes.number.isRequired,
+    trueMaxIndex: PropTypes.number.isRequired,
+
+    analysis: PropTypes.string.isRequired,
+    setTreeRoot: PropTypes.func.isRequired,
+
+    currRootID: PropTypes.string,
+    yScale: PropTypes.func
+  };
+
   componentDidMount() {
     const { trueRootID, trueIndex, trueMaxIndex, setTreeRoot } = this.props;
     setTreeRoot(trueRootID, trueIndex, trueMaxIndex);

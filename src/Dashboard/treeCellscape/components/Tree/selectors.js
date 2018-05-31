@@ -1,9 +1,5 @@
 import { scaleLinear } from "d3";
-import {
-  getCurrRootRange,
-  getCurrTreeRootRecord,
-  getIndicesPerPixel
-} from "../selectors.js";
+import { getCurrRootRange, getIndicesPerPixel } from "../selectors.js";
 import { createSelector } from "reselect";
 import config from "./config.js";
 

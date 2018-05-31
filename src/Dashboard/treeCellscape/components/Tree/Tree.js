@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 
 import { Query } from "react-apollo";
@@ -37,5 +37,9 @@ const Tree = ({ analysis }) => (
     }}
   </Query>
 );
+
+Tree.propTypes = {
+  analysis: PropTypes.string.isRequired
+};
 
 export default Tree;

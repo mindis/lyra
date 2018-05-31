@@ -74,4 +74,12 @@ const mapState = state => ({
   indices: getHeatmapIndices(state)
 });
 
+Heatmap.propTypes = {
+  analysis: PropTypes.string.isRequired,
+
+  indices: PropTypes.arrayOf(PropTypes.number.isRequired),
+
+  rootID: PropTypes.string
+};
+
 export default connect(mapState)(Heatmap);

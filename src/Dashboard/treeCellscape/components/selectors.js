@@ -31,15 +31,7 @@ export {
 
 // Heatmap
 // makeIsIndexHighlighted, -> Tree
-export {
-  getCurrRootIndex,
-  getOrderedChromosomeData,
-  getChromosomeOrder,
-  getSegsData,
-  getMissingSegIDs,
-  makeGetMissingIDMappings,
-  makeGetIDsByIndices
-} from "../selectors.js";
+export { getCurrRootIndex } from "../selectors.js";
 
 export { getCurrRootTotalNodes as getTotalIndexNum } from "../selectors.js";
 

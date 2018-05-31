@@ -4,18 +4,13 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-import { connect } from "react-redux";
 
-import { makeGetTreeNodeRecordByID, getYScale } from "./selectors.js";
-import { fetchTreeNode } from "./actions.js";
-
-import DataFetcher from "utils/DataFetcher";
+import { Query } from "react-apollo";
+import gql from "graphql-tag";
 
 import TreeNodePoint from "./TreeNode/TreeNodePoint";
 import TreeChildren from "./TreeChildren";
 import TreeHorizontalBranch from "./TreeBranch/TreeHorizontalBranch";
-import { Query } from "react-apollo";
-import gql from "graphql-tag";
 
 const TREE_NODE_QUERY = gql`
   query treeNode($analysis: String!, $id: String!) {

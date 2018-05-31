@@ -3,24 +3,16 @@ import { createSelector } from "reselect";
 import {
   getIndicesPerPixel,
   getTotalIndexNum,
-  getCurrRootIndex,
-  getSegsData,
-  getOrderedChromosomeData,
-  makeGetMissingIDMappings,
-  makeGetIDsByIndices,
-  getMissingSegIDs
+  getCurrRootIndex
 } from "../selectors.js";
 
 import config from "./config.js";
 
 // Heatmap
-export { getOrderedChromosomeData, getCurrRootID } from "../selectors.js";
+export { getCurrRootID } from "../selectors.js";
 
 // HeatmapRow
 export { makeIsIndexHighlighted } from "../selectors.js";
-
-// ChromAxis
-export { getChromosomeOrder } from "../selectors.js";
 
 /**
  * Gets number of indices that can fit per heatmap row
@@ -41,38 +33,6 @@ export const getHeatmapIndices = createSelector(
     return ids;
   }
 );
-
-const getMissingIDMappings = makeGetMissingIDMappings();
-
-export const getMissingHeatmapIDs = state =>
-  getMissingIDMappings(state, getHeatmapIndices(state));
-
-const getIDsByIndices = makeGetIDsByIndices();
-export const getHeatmapIDs = state =>
-  getIDsByIndices(state, getHeatmapIndices(state));
-
-export const getMissingHeatmapSegIDs = state =>
-  getMissingSegIDs(state, getHeatmapIDs(state));
-
-export const getHeatmapSegData = createSelector(
-  [getSegsData, getHeatmapIDs, getHeatmapIndices],
-  (segs, ids, indices) =>
-    ids
-      .filter(id => segs.hasOwnProperty(id))
-      .map((id, index) => createSegment(segs[id], id, indices[index]))
-);
-
-/**
- * Creates record given segment data and heatmap index
- * @param {array} seg
- * @param {string} id
- * @return {object}
- */
-const createSegment = (segs, cellID, heatmapIndex) => ({
-  cellID,
-  segs,
-  heatmapIndex
-});
 
 /**
  * Gets the total number of base pairs in chromosome ranges

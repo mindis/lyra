@@ -1,13 +1,4 @@
 export {
-  getSegsData,
-  getSegsPending,
-  getTreeData,
-  getTreePending,
-  getTreeRootID,
-  getCellsIndexToID,
-  getChromosomeData,
-  getChromosomeOrder,
-  getDataAnalysis,
   getHighlightedIndex,
   getHighlightedRange,
   getHighlightedElement,

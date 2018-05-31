@@ -122,14 +122,6 @@ const isNodeDescendantsExceedThreshold = (node, threshold) =>
   node["maxIndex"] - node["index"] + 1 > threshold;
 
 /**
- * Determines whether current index is at last node
- * @param {int} i - current index
- * @param {array} children
- * @return {bool}
- */
-const isLastNode = (i, children) => i + 1 >= children.length;
-
-/**
  * Determines whether cluster has enough descendants to be drawn
  * @param {object} cluster
  * @param {int} minDescendants - threshold
