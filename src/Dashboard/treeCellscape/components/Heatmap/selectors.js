@@ -3,7 +3,7 @@ import { createSelector } from "reselect";
 import {
   getIndicesPerPixel,
   getTotalIndexNum,
-  getCurrTreeRootRecord,
+  getCurrRootIndex,
   getSegsData,
   getOrderedChromosomeData,
   makeGetMissingIDMappings,
@@ -14,7 +14,7 @@ import {
 import config from "./config.js";
 
 // Heatmap
-export { getOrderedChromosomeData } from "../selectors.js";
+export { getOrderedChromosomeData, getCurrRootID } from "../selectors.js";
 
 // HeatmapRow
 export { makeIsIndexHighlighted } from "../selectors.js";
@@ -31,17 +31,13 @@ export const getIndicesPerRow = createSelector(
   indPerPx => Math.ceil(indPerPx * config["rowHeight"])
 );
 
-const getHeatmapIndices = createSelector(
-  [getIndicesPerRow, getTotalIndexNum, getCurrTreeRootRecord],
+export const getHeatmapIndices = createSelector(
+  [getIndicesPerRow, getTotalIndexNum, getCurrRootIndex],
   // (int, int) => array
-  (indPerRow, totalIndices, treeRoot) => {
-    const numRows = Math.floor(totalIndices / indPerRow);
+  (indPerRow, totalIndices, index) => {
+    const numRows = indPerRow === 0 ? 0 : Math.floor(totalIndices / indPerRow);
 
-    const ids = Array.from(
-      Array(numRows),
-      (_, x) => x * indPerRow + treeRoot["heatmapIndex"]
-    );
-
+    const ids = Array.from(Array(numRows), (_, x) => x * indPerRow + index);
     return ids;
   }
 );
@@ -81,12 +77,8 @@ const createSegment = (segs, cellID, heatmapIndex) => ({
 /**
  * Gets the total number of base pairs in chromosome ranges
  */
-const getTotalBP = createSelector(
-  [getOrderedChromosomeData],
-  // array => int
-  chromosomes =>
-    chromosomes.reduce((sum, chrom) => sum + chrom.end - chrom.start + 1, 0)
-);
+const getTotalBP = (state, chromosomes) =>
+  chromosomes.reduce((sum, chrom) => sum + chrom.end - chrom.start + 1, 0);
 
 /**
  * Gets base pair to pixel ratio
@@ -101,7 +93,7 @@ export const getBPRatio = createSelector(
  * Gets the chromosome to start pixel mapping
  */
 export const getChromPixelMapping = createSelector(
-  [getOrderedChromosomeData, getBPRatio],
+  [(state, chromosomes) => chromosomes, getBPRatio],
   // (array, int) => object
   (chromosomes, bpRatio) => {
     let xShift = 0;
@@ -117,7 +109,7 @@ export const getChromPixelMapping = createSelector(
 
       return {
         ...map,
-        [chrom.chrom]: mapEntry
+        [chrom.id]: mapEntry
       };
     }, {});
   }

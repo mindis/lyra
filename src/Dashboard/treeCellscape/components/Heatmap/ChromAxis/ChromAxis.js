@@ -6,12 +6,12 @@ import { getChromPixelMapping, getChromosomeOrder } from "./selectors.js";
 
 import ChromAxisItem from "./ChromAxisItem.js";
 
-const ChromAxis = ({ chromosomeMap, chromosomeOrder, y }) => {
-  const axisText = chromosomeOrder.map(chromosome => (
+const ChromAxis = ({ chromosomeMap, chromosomes, y }) => {
+  const axisText = chromosomes.map(chromosome => (
     <ChromAxisItem
-      key={chromosome}
-      chromosome={chromosome}
-      data={chromosomeMap[chromosome]}
+      key={chromosome.id}
+      chromosome={chromosome.id}
+      data={chromosomeMap[chromosome.id]}
       y={y}
     />
   ));
@@ -21,14 +21,11 @@ const ChromAxis = ({ chromosomeMap, chromosomeOrder, y }) => {
 ChromAxis.propTypes = {
   chromosomeMap: PropTypes.object.isRequired,
 
-  chromosomeOrder: PropTypes.arrayOf(PropTypes.string.isRequired).isRequired,
-
   y: PropTypes.number.isRequired
 };
 
-const mapState = state => ({
-  chromosomeMap: getChromPixelMapping(state),
-  chromosomeOrder: getChromosomeOrder(state)
+const mapState = (state, ownProps) => ({
+  chromosomeMap: getChromPixelMapping(state, ownProps.chromosomes)
 });
 
 export default connect(mapState)(ChromAxis);

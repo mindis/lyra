@@ -18,6 +18,7 @@ const TreeCellscape = ({ analysis }) => (
     <div>
       <svg width={width} height={height}>
         <Tree analysis={analysis} />
+        <Heatmap analysis={analysis} />
       </svg>
       <Tooltip analysis={analysis} />
     </div>

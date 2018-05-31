@@ -28,6 +28,15 @@ export const getCurrRootTotalNodes = createSelector(
 );
 
 /**
+ * Gets index of current tree root
+ */
+export const getCurrRootIndex = createSelector(
+  [getCurrRootRange],
+  // (array) => int
+  range => (range.length === 0 ? -1 : range[0])
+);
+
+/**
  *
  */
 export const isCurrRootAtRoot = createSelector(

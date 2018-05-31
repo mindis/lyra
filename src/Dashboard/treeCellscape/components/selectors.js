@@ -32,7 +32,7 @@ export {
 // Heatmap
 // makeIsIndexHighlighted, -> Tree
 export {
-  getCurrTreeRootRecord,
+  getCurrRootIndex,
   getOrderedChromosomeData,
   getChromosomeOrder,
   getSegsData,
