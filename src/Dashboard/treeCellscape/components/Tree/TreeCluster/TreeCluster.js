@@ -56,7 +56,6 @@ TreeCluster.propTypes = {
 
   /** yScale, clusterColorScale */
   yScale: PropTypes.func.isRequired,
-  clusterColorScale: PropTypes.func.isRequired,
 
   /** isHighlighted - whether current cluster is highlighted */
   isHighlighted: PropTypes.bool.isRequired,

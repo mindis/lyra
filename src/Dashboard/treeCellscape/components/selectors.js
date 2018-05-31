@@ -1,7 +1,7 @@
 import { createSelector } from "reselect";
 import { treeConfig } from "../config.js";
 
-import { getCurrRootTotalNodes as getTotalIndexNum } from "../selectors.js";
+import { getCurrRootTotalNodes } from "../selectors.js";
 
 // Tooltip
 export {
@@ -33,13 +33,13 @@ export {
 // makeIsIndexHighlighted, -> Tree
 export { getCurrRootIndex } from "../selectors.js";
 
-export { getCurrRootTotalNodes as getTotalIndexNum } from "../selectors.js";
+export { getCurrRootTotalNodes } from "../selectors.js";
 
 /**
  * Gets ratio of heatmap indices per pixel
  */
 export const getIndicesPerPixel = createSelector(
-  [getTotalIndexNum],
+  [getCurrRootTotalNodes],
   // int => int
   numNodes => numNodes / treeConfig["height"]
 );

@@ -2,7 +2,7 @@ import { createSelector } from "reselect";
 
 import {
   getIndicesPerPixel,
-  getTotalIndexNum,
+  getCurrRootTotalNodes,
   getCurrRootIndex
 } from "../selectors.js";
 
@@ -24,7 +24,7 @@ export const getIndicesPerRow = createSelector(
 );
 
 export const getHeatmapIndices = createSelector(
-  [getIndicesPerRow, getTotalIndexNum, getCurrRootIndex],
+  [getIndicesPerRow, getCurrRootTotalNodes, getCurrRootIndex],
   // (int, int) => array
   (indPerRow, totalIndices, index) => {
     const numRows = indPerRow === 0 ? 0 : Math.floor(totalIndices / indPerRow);

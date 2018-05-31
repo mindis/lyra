@@ -6,6 +6,8 @@ import reducer, {
 } from "./reducer.js";
 import { setTreeRoot, unsetTreeRoot } from "./actions.js";
 
+const NODE_ID1 = "TEST1";
+const NODE_ID2 = "TEST2";
 /**
  * Tree Path
  */
